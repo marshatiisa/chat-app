@@ -34,7 +34,10 @@ const [messageBody, setMessageBody] = useState('')
         const response = await databases.listDocuments(
             DATABASE_ID, 
             COLLECTION_ID_MESSAGES,
-            [Query.orderDesc('$createdAt')]
+            [
+                Query.orderDesc('$createdAt'),
+                Query.limit(20)
+            ]
             )
         console.log('RESPONSE:', response)
         setMessages(response.documents)
