@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { databases, DATABASE_ID, COLLECTION_ID_MESSAGES } from '../appwriteConfig'
-import {ID} from 'appwrite'
+import {ID, Query} from 'appwrite'
 
 const Room = () => {
 
@@ -24,12 +24,18 @@ const [messageBody, setMessageBody] = useState('')
             ID.unique(),
             payload
         )
+            console.log('created', response)
 
-        setMessageBody('')
+        setMessages(prevState => [response, ...messages])
+        setMessageBody('') //resets the message
     }
 
     const getMessages = async () => {
-        const response = await databases.listDocuments(DATABASE_ID, COLLECTION_ID_MESSAGES)
+        const response = await databases.listDocuments(
+            DATABASE_ID, 
+            COLLECTION_ID_MESSAGES,
+            [Query.orderDesc('$createdAt')]
+            )
         console.log('RESPONSE:', response)
         setMessages(response.documents)
     }
@@ -37,7 +43,7 @@ const [messageBody, setMessageBody] = useState('')
         <main className='container'>
             <div className='room--container'>
 
-                <form id='message--form'>
+                <form onSubmit={handleSubmit} id='message--form'>
                     <div>
                         <textarea
                             required
