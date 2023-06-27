@@ -14,20 +14,24 @@ const [messages, setMessages] = useState([])
         setMessages(response.documents)
     }
     return (
-        <div>
-            <div>
-                {messages.map(messages =>(
-                    <div key={messages.$id}>
-                        <div>
-                            <p>{messages.$createdAt}</p>
-                        </div>
-                        <div>
-                            <span>{messages.body}</span>
-                        </div>
+        <main className='container'>
+            <div className='room--container'>
+                <div>
+                    <div>
+                        {messages.map(messages =>(
+                            <div key={messages.$id} className='messages--wrapper'>
+                                <div className='message--header'>
+                                    <small className='message-timestamp'>{messages.$createdAt}</small>
+                                </div>
+                                <div className='message--body'>
+                                    <span>{messages.body}</span>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </div>
             </div>
-        </div>
+        </main>
     )
 }
 
