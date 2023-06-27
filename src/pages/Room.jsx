@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { databases, DATABASE_ID, COLLECTION_ID_MESSAGES } from '../appwriteConfig'
 import {ID, Query} from 'appwrite'
+import {Trash2} from 'react-feather'
 
 const Room = () => {
 
@@ -42,6 +43,13 @@ const [messageBody, setMessageBody] = useState('')
         console.log('RESPONSE:', response)
         setMessages(response.documents)
     }
+
+    const deleteMessage = async (message_id) => {
+        databases.deleteDocument(DATABASE_ID, COLLECTION_ID_MESSAGES, message_id)
+        // updating message array
+        setMessages(prevState => messages.filter(message => message.$id !== message_id))
+    }
+
     return (
         <main className='container'>
             <div className='room--container'>
@@ -62,13 +70,18 @@ const [messageBody, setMessageBody] = useState('')
                 </form>
                 <div>
                     <div>
-                        {messages.map(messages =>(
-                            <div key={messages.$id} className='messages--wrapper'>
+                        {messages.map(message =>(
+                            <div key={message.$id} className='messages--wrapper'>
                                 <div className='message--header'>
-                                    <small className='message-timestamp'>{messages.$createdAt}</small>
+                                    <small className='message-timestamp'>{new Date (message.$createdAt).toLocaleString()}</small>
+                                    <Trash2 
+                                    className='delete--btn'
+                                    onClick={() =>{deleteMessage(message.$id)}}
+                                    />
+                                    
                                 </div>
                                 <div className='message--body'>
-                                    <span>{messages.body}</span>
+                                    <span>{message.body}</span>
                                 </div>
                             </div>
                         ))}
