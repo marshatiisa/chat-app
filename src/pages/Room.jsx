@@ -11,7 +11,7 @@ const [messageBody, setMessageBody] = useState('')
     useEffect(() =>{
         getMessages()
 
-        client.subscribe([`databases.${DATABASE_ID}.collections.${COLLECTION_ID_MESSAGES}.documents`], response => {
+        const unsubscribe = client.subscribe([`databases.${DATABASE_ID}.collections.${COLLECTION_ID_MESSAGES}.documents`], response => {
 
             if(response.events.includes("databases.*.collections.*.documents.*.create")){
                 console.log('A MESSAGE WAS CREATED')
@@ -24,7 +24,11 @@ const [messageBody, setMessageBody] = useState('')
                 setMessages(prevState => messages.filter(message => message.$id !== response.payload.$id))
 
             }
-        })
+        });
+
+        return () => {
+            unsubscribe()
+        }
     }, [])
 
     const handleSubmit = async (e) => {
