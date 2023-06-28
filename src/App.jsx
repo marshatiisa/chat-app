@@ -4,12 +4,14 @@ import PrivateRoute from './pages/components/PrivateRoutes'
 
 import Room from './pages/Room'
 import LoginPage from './pages/LoginPage'
+import { AuthProvider } from './utils/AuthContext'
 
 function App() {
 
   return (
     <>
     <Router>
+      <AuthProvider>
       <Routes>
         <Route path="/login" element={<LoginPage/>} />
 
@@ -19,6 +21,7 @@ function App() {
         </Route>
 
       </Routes>
+      </AuthProvider>
    </Router>
     </>
   )
