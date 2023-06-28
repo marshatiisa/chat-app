@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { userAuth, handleUserLogin } from '../utils/AuthContext'
+import { useAuth } from '../utils/AuthContext'
 
 const LoginPage = () => {
-    const {user, handleUserLogin} = userAuth()
+    const {user, setUser, handleUserLogin} = useAuth()
     const navigate = useNavigate()
 
     const [credentials, setCredentials] = useState({
@@ -13,7 +13,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         if(user){ 
-            // navigate('/') // redirects user to home page
+            navigate('/login') // redirects user to home page
         }
     }, [])
 
