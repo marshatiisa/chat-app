@@ -13,8 +13,19 @@ export const AuthProvider = ({children}) => {
 
 
     useEffect(() => {
-        setLoading(false)
+        getUserOnLoad()
     }, [])
+
+    const getUserOnLoad = async () => {
+        try{
+            const accountDetails = await account.get()
+            setUser(accountDetails)
+
+        } catch(err){
+            console.error(err)
+        }
+        setLoading(false)
+    }
 
     const handleUserLogin = async (e, credentials) => {
         e.preventDefault()
@@ -26,7 +37,7 @@ export const AuthProvider = ({children}) => {
             setUser(accountDetails)
             navigate('/')
         } catch(err) {
-            console.log(err)
+            console.error(err)
         }
     }
 
