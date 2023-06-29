@@ -33,7 +33,7 @@ export const AuthProvider = ({children}) => {
         try{
             const response = await account.createEmailSession(credentials.email, credentials.password)
             console.log('LOGGED IN:', response)
-            const accountDetails = account.get()
+            const accountDetails = await account.get()
             setUser(accountDetails)
             navigate('/')
         } catch(err) {
@@ -41,10 +41,16 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    const handleUserLogout = async () => {
+        account.deleteSession('current')
+        setUser(null)
+    }
+
     const contextData = {
         user,
         handleUserLogin,
-        setUser
+        setUser,
+        handleUserLogout
     }
 
     return  <AuthContext.Provider value={contextData}>
