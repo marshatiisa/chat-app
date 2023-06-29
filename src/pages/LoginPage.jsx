@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
 
 const LoginPage = () => {
@@ -56,6 +56,7 @@ const LoginPage = () => {
                     <input className='btn btn--lg btn--main' type='submit' value='Login'/>
                 </div>
             </form>
+            <p>Don't have an account? Register <Link to='/register'>here</Link> </p>
             </div>
         </div>
     )
