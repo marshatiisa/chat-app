@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import client, { databases, DATABASE_ID, COLLECTION_ID_MESSAGES } from '../appwriteConfig'
 import {ID, Query, Role, Permission} from 'appwrite'
 import {Trash2} from 'react-feather'
@@ -11,21 +11,34 @@ const Room = () => {
 
     const [messages, setMessages] = useState([])
     const [messageBody, setMessageBody] = useState('')
+    const messagesRef = useRef();
+    messagesRef.current = messages
+
+    console.log('top',messages)
+
+    // const getCurrentMessages = () => {
+    //     return messages
+    // }
 
     useEffect(() =>{
         getMessages()
 
         const unsubscribe = client.subscribe([`databases.${DATABASE_ID}.collections.${COLLECTION_ID_MESSAGES}.documents`], response => {
-
+            console.log('top subscribe', messages)
             if(response.events.includes("databases.*.collections.*.documents.*.create")){
-                console.log('A MESSAGE WAS CREATED')
-                setMessages(prevState => [response.payload, ...messages])
+                console.log('A MESSAGE WAS CREATED', response.payload)
+                console.log('MESSAGES BEFORE SETMESSAGES:', messages, messagesRef)
+                setMessages([response.payload, ...messagesRef.current])
+                // setMessages(prevState => [response.payload, ...messagesRef.current])
 
             }
 
             if(response.events.includes("databases.*.collections.*.documents.*.delete")){
                 console.log('A MESSAGE WAS DELETED!!')
-                setMessages(prevState => messages.filter(message => message.$id !== response.payload.$id))
+                const newMessages = messagesRef.current.filter(message => message.$id !== response.payload.$id)
+                console.log(newMessages)
+                setMessages([...newMessages]) 
+                // setMessages(prevState => messages.filter(message => message.$id !== response.payload.$id))
 
             }
         });
@@ -36,6 +49,7 @@ const Room = () => {
     }, [])
 
     const handleSubmit = async (e) => {
+        console.log('top handle submit',messages)
         e.preventDefault()
 
         let payload = {
@@ -59,6 +73,7 @@ const Room = () => {
 
         // setMessages(prevState => [response, ...messages])
         setMessageBody('') //resets the message
+        console.log('bottom handle submit', messages)
     }
 
     const getMessages = async () => {
