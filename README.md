@@ -9,7 +9,7 @@ JavaScript <br/>
 React <br/>
 Appwrite Cloud DB <br/>
 
-## Current Features
+<!-- ## Current Features
 1. Posters Store-Front View
 2. Add to Cart
 3. Checkout with Stripe 
@@ -69,8 +69,8 @@ To use the Coast Chat App, you'll need an Appwrite account to set up the backend
 4. Follow the Appwrite documentation and API reference to integrate the backend functionality into your Coast Chat App.
 
 ## Contributions
-Contributions to the Coast Chat App are welcome! If you find any issues or want to add new features, please feel free to submit a pull request. Make sure to follow the project's code of conduct.
+Contributions to the Coast Chat App are welcome! If you find any issues or want to add new features, please feel free to submit a pull request. Make sure to follow the project's code of conduct. -->
 
 
-Happy chatting!
+<!-- Happy chatting! -->
 
