@@ -1,6 +1,6 @@
 # The Void
 
-A web chat application that allows users to vent - helping them release stress, anxiety, and negative thoughts. Built with JavaScript, React, and Appwrite Cloud DB. [Live Link]() <br/>
+A web chat application that allows users to vent - helping them release stress, anxiety, and negative thoughts. Built with JavaScript, React, and Appwrite Cloud DB. [Live Link](https://the-void-six.vercel.app/) <br/>
  <br/> 
 ![thevoid](https://raw.githubusercontent.com/marshatiisa/chat-app/main/the-void.png)
 
