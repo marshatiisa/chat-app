@@ -10,20 +10,26 @@ export const AuthProvider = ({children}) => {
     const navigate = useNavigate()
 
     const [loading, setLoading] = useState(true)
-    const [user, setUser] = useState(true)
+    const [user, setUser] = useState(null)
 
 
     useEffect(() => {
+        if(user){
         getUserOnLoad()
+        } else {
+            setLoading(false)
+        }
     }, [])
 
     const getUserOnLoad = async () => {
         try{
+            console.warn('about to get account', user)
             const accountDetails = await account.get()
+            console.warn('done')
             setUser(accountDetails)
 
         } catch(err){
-            console.error(err)
+            console.error('getUser on load', err)
         }
         setLoading(false)
     }

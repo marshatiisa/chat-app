@@ -4,11 +4,17 @@ import {ID, Query, Role, Permission} from 'appwrite'
 import {Trash2} from 'react-feather'
 import Header from '../components/Header'
 import { useAuth } from '../utils/AuthContext'
+import { useLocation, Navigate } from "react-router-dom";
 
 const Room = () => {
+    let location = useLocation();
 
     const { user } = useAuth()
+    if (!user) {
+        return <Navigate to="/login" state={{ from: location }} replace />;
+    }
 
+    console.log('Room user:', user)
     const [messages, setMessages] = useState([])
     const [messageBody, setMessageBody] = useState('')
     const messagesRef = useRef();

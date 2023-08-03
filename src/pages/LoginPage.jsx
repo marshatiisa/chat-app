@@ -5,7 +5,7 @@ import { useAuth } from '../utils/AuthContext'
 const LoginPage = () => {
     const {user, setUser, handleUserLogin} = useAuth()
     const navigate = useNavigate()
-
+console.log('user:', user)
     const [credentials, setCredentials] = useState({
         email: '',
         password: ''
