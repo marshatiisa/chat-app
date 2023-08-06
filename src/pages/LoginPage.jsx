@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../utils/AuthContext'
+import logoImage from '../assets/void-logo.png'
 
 const LoginPage = () => {
     const {user, setUser, handleUserLogin} = useAuth()
@@ -12,7 +13,7 @@ console.log('user:', user)
     })
 
     useEffect(() => {
-        if(user){ 
+        if(user){
             navigate('/login') // redirects user to home page
         }
     }, [])
@@ -26,12 +27,14 @@ console.log('user:', user)
 
     return (
         <div className='auth--container'>
+            <img src={logoImage} alt='Logo' className='logo--image' />
             <div className='form--wrapper'>
             <form onSubmit={(e) => {handleUserLogin(e, credentials)} }>
                 <div className='field--wrapper'>
                     <label >Email:</label>
-                    <input 
-                    type='email' 
+                    <input
+                    className='input--credentials'
+                    type='email'
                     required
                     name='email'
                     placeholder='Enter your email'
@@ -42,8 +45,9 @@ console.log('user:', user)
 
                 <div className='field--wrapper'>
                     <label >Password:</label>
-                    <input 
-                    type='password' 
+                    <input
+                    className='input--credentials'
+                    type='password'
                     required
                     name='password'
                     placeholder='Enter password'
@@ -57,9 +61,14 @@ console.log('user:', user)
                 </div>
             </form>
             <p>Don't have an account? Register <Link to='/register'>here</Link> </p>
+            <div className="login--testCredsContainer">
+              <p>You can test the app with these credentials:</p>
+              <p className="login--testCreds">email: <span className="test--email">test1234@gmail.com</span></p>
+              <p className="login--testCreds">password: <span className="test--password">test1234</span></p>
+            </div>
             </div>
         </div>
     )
 }
 
-export default LoginPage 
+export default LoginPage

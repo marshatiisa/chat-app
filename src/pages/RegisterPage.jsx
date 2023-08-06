@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../utils/AuthContext';
+import logoImage from '../assets/small-void-logo.png';
 
 const RegisterPage = () => {
 
     const {handleUserRegister} = useAuth()
+    const MAX_USERNAME_LENGTH = 6;
 
     const [credentials, setCredentials] = useState({
         name: '',
@@ -17,28 +19,36 @@ const RegisterPage = () => {
         let name = e.target.name
         let value = e.target.value
 
+        if (name === 'name') {
+          value = value.slice(0, MAX_USERNAME_LENGTH);
+        }
+
         setCredentials({...credentials, [name]:value})
     }
 
     return (
         <div className='auth--container'>
+        <img src={logoImage} alt='Logo' className='logo--smallImage' />
         <div className='form--wrapper'>
         <form onSubmit={(e) => {handleUserRegister(e, credentials)} }>
         <div className='field--wrapper'>
-                <label >Name:</label>
-                <input 
-                type='text' 
+                <label >Username:</label>
+                <input
+                className='input--credentials'
+                type='text'
                 required
                 name='name'
-                placeholder='Enter your name'
+                placeholder='Enter username - 6 chars only'
                 value={credentials.name}
                 onChange={handleInputChange}
+                maxLength={MAX_USERNAME_LENGTH}
                 />
             </div>
             <div className='field--wrapper'>
                 <label >Email:</label>
-                <input 
-                type='email' 
+                <input
+                className='input--credentials'
+                type='email'
                 required
                 name='email'
                 placeholder='Enter your email'
@@ -49,8 +59,9 @@ const RegisterPage = () => {
 
             <div className='field--wrapper'>
                 <label >Password:</label>
-                <input 
-                type='password' 
+                <input
+                className='input--credentials'
+                type='password'
                 required
                 name='password1'
                 placeholder='Enter password'
@@ -61,8 +72,9 @@ const RegisterPage = () => {
 
             <div className='field--wrapper'>
                 <label >Confirm Password:</label>
-                <input 
-                type='password' 
+                <input
+                className='input--credentials'
+                type='password'
                 required
                 name='password2'
                 placeholder='Confirm password'
@@ -80,7 +92,7 @@ const RegisterPage = () => {
         </div>
     </div>
     )
-    
+
 }
 
 export default RegisterPage

@@ -1,38 +1,69 @@
-
 :root{
-    --mainBgColor:rgba(20,20,31,11);
-    --secondaryBgColor:rgba(27,27,39,1);
-    --borderColor1:rgba(40,41,57,1);
-    --borderColor2:rgba(79,86,105,1);
-    --textColorMain:#fff;
-    --textColorSecondary:rgb(226, 227, 232);
-    --themeColorMain:rgba(219,26,90,1);
-    --themeColorSecondary:#386fd2;
+    --voidMainColor: #ff0059;
+    --voidInputColor: #1d2129;
+    --voidBackgroundWhite: #fff;
+    --voidBorderBlack: 1px solid black;
+    --voidBorderDarkGray: 1px solid #999;
+
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+  font-family: 'Source Sans Pro',-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
       'Open Sans', 'Helvetica Neue', sans-serif;
-  }
+}
 
-a{
-  color: #40e0d0;
+html {
+  overflow: hidden;
 }
 
 body{
-    background-color: var(--mainBgColor);
-    color: var(--textColorMain);
+  color: black;
+  background: #fff;
+  background-image: url('assets/pattern.png');
+  background-repeat: repeat;
+}
+
+a {
+  color: var(--voidMainColor);
 }
 
 .container{
-  max-width: 600px;
-  margin:20px auto;
+  min-width: 320px;
+  max-width: 480px;
+  margin: 20px auto;
+  padding: 0 20px;
 }
 
 /* Login & Register Pages */
+.logo--wrapper {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.logo--image {
+  min-width: 320px;
+  width: 100%;
+  max-width: 480px;
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  padding-bottom: 20px;
+}
+
+.logo--smallImage {
+  min-width: 250px;
+  width: 100%;
+  max-width: 250px;
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  padding-bottom: 20px;
+}
 
 .auth--container{
   height: 100vh;
@@ -54,14 +85,32 @@ body{
   padding: 0.5em 0;
 }
 
+.login--testCredsContainer {
+  background-color: #fbfbfb;
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  max-width: 320px;
+  border: 2.5px dashed #ccc;
+  border-radius: 10px;
+  color: #666;
+  opacity: 95%;
+}
 
+.login--testCreds {
+  margin-top: 5px;
+  color: #aaa;
+}
+
+.test--email, .test--password {
+  color: var(--voidInputColor);
+}
 
 /* Form Input Styling */
-
 input[type="text"], input[type="password"], input[type="email"], textarea{
-  background: var(--mainBgColor);
+  background: #fff;
   border: none;
-  border-bottom: 1px solid var(--borderColor1);
+  border-bottom: var(--voidBorderDarkGray);
   padding: 1rem;
   border-radius: 3px;
   width: 100%;
@@ -71,9 +120,49 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
   text-shadow: none !important;
 }
 
+.input--credentials {
+  background: #fff;
+  border: var(--voidBorderBlack);
+  color: var(--voidInputColor);;
+  border-radius: 15px;
+}
+
+.textarea--void {
+  transform: translateY(-30px);
+  background: #fff;
+  border: var(--voidBorderBlack);
+  border-radius: 15px;
+  color: var(--voidInputColor);;
+  font-size: 14px;
+  resize: none;
+  flex: 1;
+  margin-right: 5px;
+  height: 100px;
+}
+
+.textarea--void::placeholder {
+  color: var(--voidInputColor);;
+}
+
+#releaseButton {
+  background-color: white;
+  border: var(--voidBorderBlack);
+  color: black;
+  border-radius: 15px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%,-23px);
+  width: 80px;
+  font-size: 13px;
+}
+
+#releaseButton:hover {
+  background-color: var(--voidMainColor);
+  border: 1px solid var(--voidMainColor);;
+  color: #fff;
+}
 
 /* Button Styling */
-
 .btn{
   padding: 0.5em 1em;
   border: none;
@@ -87,12 +176,13 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
 }
 
 .btn--main{
-  background-color: rgba(219,26,90,1);
+  background-color: var(--voidMainColor);
   color: #fff;
 }
 
 .btn--secondary{
-  background-color: #8db3dd;
+  background-color: var(--voidMainColor);
+  color: #fff;
 }
 
 .btn:hover{
@@ -100,45 +190,70 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
 }
 
 /* Header Styling */
-
 #header--wrapper{
-  background-color: var(--mainBgColor);
   padding: 1em;
   display: flex;
   justify-content: space-between;
   border-radius: 10px 10px 0 0;
-  border:1px solid var(--borderColor1);
+  background-color: var(--voidBackgroundWhite);
+  border: var(--voidBorderDarkGray);
   border-bottom: none;
+  position: relative;
+  z-index: 10000000px;
+}
+
+.header--text {
+  font-size: 18px;
+  color: #555;
+  padding-left: 20px;
+}
+
+.header--username {
+  font-size: 26px;
+  color: #333;
 }
 
 .header--link{
-  color: #c7d8eb;
+  position: absolute;
+  right: calc(50% - 212px);
+  transform: translateY(-45px);
+  color: #333;
+  width: 17px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .header--link:hover{
-  color: #8db3dd;
+  color: var(--voidMainColor);
 }
 
 /* Room Styling */
-
 .room--container{
   padding: 2em;
-  background-color: var(--secondaryBgColor);
   border-radius: 0 0 10px 10px;
-  border:1px solid var(--borderColor1);
+  border: var(--voidBorderDarkGray);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .11);
+  border-top: none;
+  background-color: var(--voidBackgroundWhite);
 }
 
 #message--form{
-  display: flex;
-  flex-direction: column;
   gap: 0.5em;
 }
 
 .send-btn--wrapper{
-  display: flex;
-  justify-content: flex-end;
+  margin-left: 10px;
+}
+
+.messages--container {
+  transform: translateY(-30px);
+}
+
+.messages--wrapper {
+  background: white;
+  border: 0.5px solid #666;
+  border-radius: 15px;
+  margin-top: 20px;
 }
 
 .message--wrapper{
@@ -152,41 +267,156 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
 .message--header{
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-top: 10px;
 }
 
 .message--body{
   padding: 0.5em 0;
-  color: var(--textColorSecondary);
-  background-color: var(--themeColorMain);
-  padding: 1em;
+  background-color: transparent;
+  padding: 0 1em 1em 1em;
   border-radius: 20px;
   width:fit-content;
   max-width: 100%;
-  word-wrap: break-word; /* added */
+  word-wrap: break-word;
+  font-size: 15px;
+  color: #5f5f5f;
 }
 
-.message--body--owner{
-  border: 1px solid rgba(219,26,90,1);
-  background-color: var(--secondaryBgColor);
+.message--username {
+  color: #2c2c2c;
+  text-transform: lowercase;
 }
 
-.message-timestamp{
+.message--timestamp{
   margin-left: 1em;
-  color: rgb(164, 161, 161);
+  color: #a5a5a5;
+  color: #b5b5b5;
+  text-transform: none;
 }
 
 .delete--btn{
-  color:#8db3dd;
+  color: rgb(220,220,220);
   cursor: pointer;
   transition: 0.3s;
   width: 16px;
+  transform: translate(-10px, -4px);
 }
 
 .delete--btn:hover{
-  color:red;
+  color: var(--voidMainColor);
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
 
+.void {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url('assets/void.png');
+  background-size: 1000px 100px;
+}
 
+.void#void1{
+  z-index: 1000;
+  opacity: 0.8;
+  bottom: 0;
+  animation: animateWave 4s linear infinite;
+}
 
+.void#void2{
+  z-index: 999;
+  opacity: 0.4;
+  bottom: 10px;
+  animation: animateWaveReverse 4s linear infinite;
+}
+.void#void3{
+  z-index: 1000;
+  opacity: 0.2;
+  bottom: 15px;
+  animation: animateWave 3s linear infinite;
+}
+
+.void#void4{
+  z-index: 999;
+  opacity: 0.6;
+  bottom: 20px;
+  animation: animateWaveReverse 3s linear infinite;
+}
+
+@keyframes animateWave
+{
+  0%
+  {
+      background-position-x: 1000px;
+  }
+  100%
+  {
+      background-position-x: 0px;
+  }
+}
+
+@keyframes animateWaveReverse
+{
+  0%
+  {
+      background-position-x: 0px;
+  }
+  100%
+  {
+      background-position-x: 1000px;
+  }
+}
+
+::selection {
+  background: var(--voidMainColor);
+  color: #fff;
+}
+::-moz-selection {
+  background: var(--voidMainColor);
+  color: #fff;
+}
+
+/* iPhone */
+@media only screen
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+  .header--text {
+    font-size: 15px;
+  }
+  .header--username {
+    font-size: 23px;
+  }
+  .header--link {
+    right: 5px;
+    transform: translateY(-43px);
+  }
+}
+
+@media only screen
+  and (max-device-width: 350px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+  .header--text {
+    font-size: 13px;
+  }
+  .header--username {
+    font-size: 18px;
+  }
+  .header--link {
+    transform: translateY(-35px);
+  }
+  .message--timestamp{
+    font-size: 11px;
+  }
+}
